@@ -103,11 +103,18 @@
             </button>
             </div>
             <button
-            id="getContractInfo"
-            onclick="getContractSymbol()"
-            class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white"
-            >
-            Get Contract Symbol
+                id="getContractInfo"
+                onclick="getContractSymbol()"
+                class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white"
+                >
+                Get Contract Symbol
+            </button>
+            <button
+                id="copyContractAddress"
+                onclick="copy()"
+                class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white"
+                >
+                0x119B654E0b39F059b5D8D0603d3E04aC5f810669
             </button>
             <div class="flex flex-col space-y-2"></div>
         </div>
@@ -162,14 +169,19 @@
                     alert('No ether browser externsion detected.')
                 }
             }
+            async function copy(){
+                const CONTRACT_ADDRESS='0x119B654E0b39F059b5D8D0603d3E04aC5f810669';
+                navigator.clipboard.writeText(CONTRACT_ADDRESS);
+                alert(CONTRACT_ADDRESS);
+            }
             async function getContractSymbol(){
                 const CONTRACT_ADDRESS='0x119B654E0b39F059b5D8D0603d3E04aC5f810669';
                 const contract = new window.web3.eth.Contract(window.ABI, CONTRACT_ADDRESS);
                 //--Data from contract
-                const ownerValue = await contract.methods.owner().call({from: window.userAddress})
-                const getBalanceValue = await contract.methods.getBalance().call({from: window.userAddress})
-                const totalSupplyValue = await contract.methods.totalSupply().call({from: window.userAddress})
-                debugger
+                const ownerValue = await contract.methods.owner().call({from: window.userAddress});
+                const getBalanceValue = await contract.methods.getBalance().call({from: window.userAddress});
+                const totalSupplyValue = await contract.methods.totalSupply().call({from: window.userAddress});
+                //--Show information
                 document.getElementById('ownerValueText').innerHTML = ownerValue;
                 document.getElementById('getBalanceText').innerHTML = getBalanceValue;
                 document.getElementById('totalSupplyText').innerHTML = totalSupplyValue;
