@@ -1,0 +1,179 @@
+<head>
+        <link
+        href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+        rel="stylesheet"
+        />
+        <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.6.1/web3.min.js"
+        integrity="sha512-5erpERW8MxcHDF7Xea9eBQPiRtxbse70pFcaHJuOhdEBQeAxGQjUwgJbuBDWve+xP/u5IoJbKjyJk50qCnMD7A=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+        ></script>
+    </head>
+
+    <body class="h-full">
+        <div
+        class="
+            flex
+            w-full
+            h-full
+            justify-center
+            content-center
+            items-center
+            space-x-4
+        "
+        >
+        <div class="flex flex-col space-y-6">
+            <h3 class="text-center">Working with Web3.js!</h3>
+            <div class="flex flex-col space-y-2">
+                <div class="container flex justify-center mx-auto">
+                    <div class="flex flex-col">
+                        <div class="w-full">
+                            <div class="border-b border-gray-200 shadow">
+                                <table>
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-6 py-2 text-xs text-gray-500">
+                                                Information
+                                            </th>
+                                            <th class="px-6 py-2 text-xs text-gray-500">
+                                                Value
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white">
+                                        <tr class="whitespace-nowrap">
+                                            <td class="px-6 py-4 text-sm text-gray-500">
+                                                Owner
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <div id="ownerValueText" class="text-sm text-gray-900">
+                                                    Jon doe
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="whitespace-nowrap">
+                                            <td class="px-6 py-4 text-sm text-gray-500">
+                                                Balance
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <div id="getBalanceText" class="text-sm text-gray-900">
+                                                    Jon doe
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="whitespace-nowrap">
+                                            <td class="px-6 py-4 text-sm text-gray-500">
+                                                Total Supply
+                                            </td>
+                                            <td class="px-6 py-4">
+                                                <div id="totalSupplyText" class="text-sm text-gray-900">
+                                                    Jon doe
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <button
+                onclick="loginWithEth()"
+                class="
+                rounded
+                bg-white
+                border border-gray-400
+                hover:bg-gray-100
+                py-2
+                px-4
+                text-gray-600
+                hover:text-gray-700
+                "
+            >
+                Login & Save ETH Address
+            </button>
+            <p id="userAddress" class="text-gray-600"></p>
+            <button
+                id="logoutButton"
+                onclick="logout()"
+                class="hidden text-blue-500 underline"
+            >
+                Logout
+            </button>
+            </div>
+            <button
+            id="getContractInfo"
+            onclick="getContractSymbol()"
+            class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white"
+            >
+            Get Contract Symbol
+            </button>
+            <div class="flex flex-col space-y-2"></div>
+        </div>
+        </div>
+        <script>
+            window.userAddress = null;
+            window.onload =  async ()=>{
+                if(window.ethereum){
+                    window.web3=new Web3(ethereum);
+                    try{
+                        await ethereum.enable();
+                    }
+                    catch(error){
+                        console.error(error);
+                    }
+                }
+                else{
+                    alert('No ether browser externsion detected.')
+                }
+                window.userAddress = window.localStorage.getItem('userAddress');
+                showAddress();
+            }
+            function showAddress(){
+                if(!window.userAddress) {
+                    document.getElementById('userAddress').innerText = null;
+                    document.getElementById('logoutButton').classList.add('hidden');
+                    return false;
+                }
+                else{
+                    document.getElementById('userAddress').innerText = `ETH address: ${window.userAddress}`;
+                    document.getElementById('logoutButton').classList.remove('hidden');
+                };
+            }
+            function logout(){
+                window.userAddress=null;
+                window.localStorage.removeItem('userAddress');
+                showAddress();
+            }
+            async function loginWithEth(){
+                if(window.web3){
+                    try{
+                        const accounts=await web3.eth.getAccounts();
+                        window.userAddress=accounts[0];
+                        window.localStorage.setItem('userAddress', accounts[0]);
+                        showAddress();
+                    }
+                    catch(error){
+                        console.error(error);
+                    }
+                }
+                else {
+                    alert('No ether browser externsion detected.')
+                }
+            }
+            async function getContractSymbol(){
+                const CONTRACT_ADDRESS='0x119B654E0b39F059b5D8D0603d3E04aC5f810669';
+                const contract = new window.web3.eth.Contract(window.ABI, CONTRACT_ADDRESS);
+                //--Data from contract
+                const ownerValue = await contract.methods.owner().call({from: window.userAddress})
+                const getBalanceValue = await contract.methods.getBalance().call({from: window.userAddress})
+                const totalSupplyValue = await contract.methods.totalSupply().call({from: window.userAddress})
+                debugger
+                document.getElementById('ownerValueText').innerHTML = ownerValue;
+                document.getElementById('getBalanceText').innerHTML = getBalanceValue;
+                document.getElementById('totalSupplyText').innerHTML = totalSupplyValue;
+            }
+            window.ABI=[{"inputs":[],"stateMutability":"payable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"balance","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"sender","type":"address"}],"name":"LogDepositReceived","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"balance","type":"uint256"}],"name":"userWithDraw","type":"event"},{"stateMutability":"payable","type":"fallback"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"URLsByOwner","outputs":[{"internalType":"string","name":"name","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"getBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"}],"name":"getOnions","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"nameExist","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"nameOnions","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"},{"internalType":"string[]","name":"_onions","type":"string[]"}],"name":"setOnions","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"}],"name":"setURL","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"userBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"userWithdraw","outputs":[],"stateMutability":"payable","type":"function"}];
+        </script>
+</body>
