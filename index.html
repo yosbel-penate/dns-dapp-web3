@@ -24,8 +24,16 @@
             space-x-4
         "
         >
-        <div class="flex flex-col space-y-6">
-            <h3 class="text-center">Working with Web3.js!</h3>
+        <div class="flex flex-col space-y-6 m-100">
+            <br/>
+            <button
+                id="copyContractAddress"
+                onclick="copy()"
+                class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
+                >
+                <span>Contract: 0x119B654E0b39F059b5D8D0603d3E04aC5f810669</span>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+            </button>
             <div class="flex flex-col space-y-2">
                 <div class="container flex justify-center mx-auto">
                     <div class="flex flex-col">
@@ -111,19 +119,6 @@
                 Logout
             </button>
             </div>
-            <button
-                id="copyContractAddress"
-                onclick="copy()"
-                class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
-                >
-                <span>Contract: 0x119B654E0b39F059b5D8D0603d3E04aC5f810669</span>
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-            </button>
-            <button
-            class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
-            >
-            <span id="accountText">Account:</span>
-        </button>
             <button
                 onclick="deposit_onclick()"
                 class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
@@ -225,7 +220,6 @@
                 document.getElementById('ownerValueText').innerHTML = ownerValue;
                 document.getElementById('getBalanceText').innerHTML = getBalanceValue;
                 document.getElementById('totalSupplyText').innerHTML = totalSupplyValue;
-                document.getElementById('accountText').innerText = "Wallet address: "+window.userAddress;
             }
             async function setURL_onclick(){
                 const contract = new window.web3.eth.Contract(window.ABI, window.CONTRACT_ADDRESS);
