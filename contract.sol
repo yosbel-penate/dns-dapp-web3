@@ -108,6 +108,14 @@ contract DnsProvider{
             }
         }
     }
+    /** @dev Optener las direcciones onion asociadas a un DNS name.
+      * @param _urlName Nombre de la direccion DNS.
+      * @return string[] Onions asociados a _urlName.
+      */
+    function getOnions(string memory _urlName)external view returns(string[] memory){
+        string[] memory onions = nameOnions[_urlName];
+        return onions;
+    }
     function runThePayment() internal returns(bool){
          require(!lockBalances);
          lockBalances = true;
@@ -117,14 +125,6 @@ contract DnsProvider{
             bool success = owner.send(handlingCost);
          lockBalances = false;
          return success;
-    }
-    /** @dev Optener las direcciones onion asociadas a un DNS name.
-      * @param _urlName Nombre de la direccion DNS.
-      * @return string[] Onions asociados a _urlName.
-      */
-    function getOnions(string memory _urlName)external view returns(string[] memory){
-        string[] memory onions = nameOnions[_urlName];
-        return onions;
     }
     function withdrawSurplus()public onlyOwner{
         require(!lockBalances);
