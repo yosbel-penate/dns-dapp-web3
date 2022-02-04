@@ -143,6 +143,25 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "nameExist",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "owner",
 				"outputs": [
@@ -260,10 +279,10 @@
 	},
 	"sources": {
 		"contract.sol": {
-			"keccak256": "0x5f0396205a8d5d58f39c7c86a2ba57f7db9c971ec2d4ab84f9c8ed18add3cdfb",
+			"keccak256": "0xcb9b3cff6b462310c01650451e5bf23c54d0f39827edef553e4f96a9e6d441b1",
 			"urls": [
-				"bzz-raw://06837991d6483beb2de91e0d793768400dee0f7477f19bda7bc9bcfb48a5449f",
-				"dweb:/ipfs/QmZbLuFQVZodv66NkMeENzDREca9gUnGvFEiUxSma7bbpa"
+				"bzz-raw://cc9469b53957d9069136cf523618676f1cbb279a07f77c9a9888b30a4a2b4d0e",
+				"dweb:/ipfs/QmQh9ffGdkJMQcHm3mGgGYkowvj5oqPL3oYB7ncGDra8ez"
 			]
 		}
 	},

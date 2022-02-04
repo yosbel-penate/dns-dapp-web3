@@ -5,7 +5,7 @@ contract DnsProvider{
     address payable public owner;
     mapping(address=>string[]) private URLsByOwners;
     mapping(string=>string[]) private nameOnions;
-    mapping(string => bool) private nameExist;
+    mapping(string => bool) public nameExist;
     constructor()payable{
         owner = payable(msg.sender);
     }
