@@ -77,15 +77,28 @@
 						"type": "uint256"
 					}
 				],
-				"name": "URLsByOwner",
+				"name": "URLsByOwners",
 				"outputs": [
 					{
 						"internalType": "string",
-						"name": "name",
+						"name": "",
 						"type": "string"
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_urlName",
+						"type": "string"
+					}
+				],
+				"name": "deleteURLs",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -117,6 +130,19 @@
 					}
 				],
 				"name": "getOnions",
+				"outputs": [
+					{
+						"internalType": "string[]",
+						"name": "",
+						"type": "string[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getURLs",
 				"outputs": [
 					{
 						"internalType": "string[]",
@@ -244,6 +270,24 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_urlName",
+						"type": "string"
+					}
+				],
+				"name": "transferURLs",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "",
 						"type": "address"
 					}
@@ -302,10 +346,10 @@
 	},
 	"sources": {
 		"contract.sol": {
-			"keccak256": "0x7118ecb65e35ff73e503c96c8fcbcc2175f7fbdcf77967689b7d2628dfeba9da",
+			"keccak256": "0x9131901e7aedefdbdefec1492f134c4a43a9952c04f71b78c61e7659036848be",
 			"urls": [
-				"bzz-raw://bc00a7fbb6129cad4bd513e724af73e57c594a0ada4d51ed0c524852f01987f4",
-				"dweb:/ipfs/QmQgq348zkRKhR5FpeEDAAfNeUMvnQNd4giAT1otRe63h3"
+				"bzz-raw://cb2214a47f386a43fc55fdd774f32d40948f4941e80db3c20451d3d504d10caa",
+				"dweb:/ipfs/QmYNSeQxrbeiQxa5C281yy3ktkFrabiKb5HP3zErhUDCWT"
 			]
 		}
 	},

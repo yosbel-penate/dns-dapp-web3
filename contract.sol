@@ -2,12 +2,8 @@ pragma solidity ^0.8.7;
 
 contract Payabel{
     uint constant public handlingCost =  1800000000000000;
-    struct URL{
-        string name;
-        string[] onions;
-    }
     address payable public owner;
-    mapping(address=>URL[]) public URLsByOwner;
+    mapping(address=>string[]) public URLsByOwners;
     mapping(string=>string[]) public nameOnions;
     mapping(string => bool) public nameExist;
     constructor()payable{
@@ -46,23 +42,42 @@ contract Payabel{
     function setURL(string memory _urlName)external{
         require(!nameExist[_urlName]);
         require(runThePayment());
-        URL memory newURL;
-        newURL.name=_urlName;
-        URLsByOwner[msg.sender].push(newURL);
+        URLsByOwners[msg.sender].push(_urlName);
         nameExist[_urlName] = true;
     }
-    function getURL() view external{
-
+    function getURLs() view external returns(string[] memory){
+        return URLsByOwners[msg.sender];
     }
+    function deleteURLs(string memory _urlName)external{
+        require(nameExist[_urlName]);
+        string[] memory urlNames = URLsByOwners[msg.sender];
+        for(uint i=0; i<urlNames.length; i++){
+            if(memcmp(bytes(urlNames[i]), bytes(_urlName))){
+                delete URLsByOwners[msg.sender][i];
+                delete nameOnions[_urlName];
+                delete nameExist[_urlName];
+            }
+        }
+     }
+     function transferURLs(address _to, string memory _urlName)external{
+        require(nameExist[_urlName]);
+        string[] memory urlNames = URLsByOwners[msg.sender];
+        for(uint i=0; i<urlNames.length; i++){
+            if(memcmp(bytes(urlNames[i]), bytes(_urlName))){
+                delete nameOnions[_urlName];
+                delete URLsByOwners[msg.sender][i];
+                URLsByOwners[_to].push(_urlName);
+            }
+        }
+     }
     function setOnions( string memory _urlName, string[] memory _onions)external{
         require(userBalance[msg.sender]>=handlingCost);
         require(nameExist[_urlName]);
-        URL[] memory urls = URLsByOwner[msg.sender];
-        for(uint i=0; i<urls.length; i++){
-            if(memcmp(bytes(urls[i].name), bytes(_urlName))){
+        string[] memory urlNames = URLsByOwners[msg.sender];
+        for(uint i=0; i<urlNames.length; i++){
+            if(memcmp(bytes(urlNames[i]), bytes(_urlName))){
                 require(runThePayment());
-                urls[i].onions=_onions;
-                nameOnions[urls[i].name]=_onions;
+                nameOnions[urlNames[i]]=_onions;
             }
         }
     }
@@ -97,5 +112,4 @@ contract Payabel{
     function memcmp(bytes memory a, bytes memory b) internal pure returns(bool){
         return (a.length == b.length) && (keccak256(a) == keccak256(b));
     }
-
 }
