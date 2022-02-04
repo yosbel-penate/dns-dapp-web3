@@ -6,10 +6,10 @@ contract Payabel{
         string name;
         string[] onions;
     }
+    address payable public owner;
     mapping(address=>URL[]) public URLsByOwner;
     mapping(string=>string[]) public nameOnions;
     mapping(string => bool) public nameExist;
-    address payable public owner;
     constructor()payable{
         owner = payable(msg.sender);
     }
@@ -50,6 +50,9 @@ contract Payabel{
         newURL.name=_urlName;
         URLsByOwner[msg.sender].push(newURL);
         nameExist[_urlName] = true;
+    }
+    function getURL() view external{
+
     }
     function setOnions( string memory _urlName, string[] memory _onions)external{
         require(userBalance[msg.sender]>=handlingCost);
@@ -94,4 +97,5 @@ contract Payabel{
     function memcmp(bytes memory a, bytes memory b) internal pure returns(bool){
         return (a.length == b.length) && (keccak256(a) == keccak256(b));
     }
+
 }
