@@ -1,5 +1,5 @@
 pragma solidity ^0.8.7;
-
+/** @title DNS provider. */
 contract DnsProvider{
     //-->Variables
     address payable public owner;
@@ -18,6 +18,10 @@ contract DnsProvider{
     constructor()payable{
         owner = payable(msg.sender);
     }
+    fallback() external payable {
+       require(msg.data.length == 0); 
+    }
+    /** @dev Usar este metodo para demositar dinero en el contrato.*/
     function deposit() payable external {
         require(!lockBalances);
         lockBalances = true;
@@ -27,9 +31,7 @@ contract DnsProvider{
         assert(address(this).balance >= totalSupply);
         emit Deposit(msg.sender, msg.value, userBalance[msg.sender]);
     }
-    fallback() external payable {
-       require(msg.data.length == 0); 
-    }
+    /** @dev El usuario puede utilizar este metodo para retirar el dinero sobrante.*/
     function withdrawBalance() public {
         require(!lockBalances);
         lockBalances = true;
@@ -41,18 +43,30 @@ contract DnsProvider{
         require(success);
         emit WithdrawBalance( msg.sender, amountToWithdraw, totalSupply);
     }
+    /** @dev Obtener el balance que tiene el contrato.
+      * @return balance del contrato.
+      */
     function getBalance()external view returns(uint){
         return address(this).balance;
     }
+    /** @dev El usuario puede apropiarce se un nombre DNS que nadie posea.
+      * @param _urlName nuevo nombre DNS.
+      */
     function setURL(string memory _urlName)external{
         require(!nameExist[_urlName]);
         require(runThePayment());
         URLsByOwners[msg.sender].push(_urlName);
         nameExist[_urlName] = true;
     }
+    /** @dev El usuario puede obtener los nombres DNS de su propiedad.
+      * @return string[] Listado de nombres DNS.
+      */
     function getURLs() view external returns(string[] memory){
         return URLsByOwners[msg.sender];
     }
+    /** @dev Eliminar un nombre DNS.
+      * @param _urlName Nombre DNS.
+      */
     function deleteURLs(string memory _urlName)external{
         require(nameExist[_urlName]);
         string[] memory urlNames = URLsByOwners[msg.sender];
@@ -64,6 +78,10 @@ contract DnsProvider{
             }
         }
      }
+     /** @dev Transferir la propiedad de un nombre DNS a otro usuario.
+      * @param _to Usuario que recibir el nombre DNS.
+      * @param _urlName el nombre DNS.
+      */
      function transferURLs(address _to, string memory _urlName)external{
         require(nameExist[_urlName]);
         string[] memory urlNames = URLsByOwners[msg.sender];
@@ -75,6 +93,10 @@ contract DnsProvider{
             }
         }
      }
+     /** @dev Asociar a un nombre DNS un listado de direcciones onions.
+      * @param _urlName Nombre de la direccion DNS.
+      * @param _onions string[] Onions a asociar a _urlName.
+      */
     function setOnions( string memory _urlName, string[] memory _onions)external{
         require(userBalance[msg.sender]>=handlingCost);
         require(nameExist[_urlName]);
@@ -96,6 +118,10 @@ contract DnsProvider{
          lockBalances = false;
          return success;
     }
+    /** @dev Optener las direcciones onion asociadas a un DNS name.
+      * @param _urlName Nombre de la direccion DNS.
+      * @return string[] Onions asociados a _urlName.
+      */
     function getOnions(string memory _urlName)external view returns(string[] memory){
         string[] memory onions = nameOnions[_urlName];
         return onions;
