@@ -1,17 +1,23 @@
 pragma solidity ^0.8.7;
 
 contract DnsProvider{
-    uint constant public handlingCost =  1800000000000000;
+    //-->Variables
     address payable public owner;
+    uint constant public handlingCost =  1800000000000000;
     mapping(address=>string[]) private URLsByOwners;
     mapping(string=>string[]) private nameOnions;
     mapping(string => bool) public nameExist;
+    mapping(address=>uint) private userBalance;
+    uint public totalSupply;
+    bool private lockBalances;
+    //-->End Variables
+    //-->Events
+    event Deposit(address sender, uint amount, uint balance);
+    event WithdrawBalance( address user,uint amount, uint totalSupply);
+    //-->End Events
     constructor()payable{
         owner = payable(msg.sender);
     }
-    mapping(address=>uint) private userBalance;
-    uint public totalSupply;
-    event Deposit(address sender, uint amount, uint balance);
     function deposit() payable external {
         require(!lockBalances);
         lockBalances = true;
@@ -24,7 +30,6 @@ contract DnsProvider{
     fallback() external payable {
        require(msg.data.length == 0); 
     }
-    event WithdrawBalance( address user,uint amount, uint totalSupply);
     function withdrawBalance() public {
         require(!lockBalances);
         lockBalances = true;
@@ -81,7 +86,6 @@ contract DnsProvider{
             }
         }
     }
-    bool private lockBalances;
     function runThePayment() internal returns(bool){
          require(!lockBalances);
          lockBalances = true;
