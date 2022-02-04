@@ -253,8 +253,62 @@
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {},
-			"title": "DNS provider. ",
+			"methods": {
+				"deleteURLs(string)": {
+					"details": "Delete a DNS name.",
+					"params": {
+						"_urlName": "Name DNS."
+					}
+				},
+				"deposit()": {
+					"details": "Use this method to deposit money in the contract."
+				},
+				"getBalance()": {
+					"details": "Obtain the balance that the contract has.",
+					"returns": {
+						"_0": "contract balance."
+					}
+				},
+				"getOnions(string)": {
+					"details": "Obtain onion addresses associated with a DNS name.",
+					"params": {
+						"_urlName": "name DNS."
+					},
+					"returns": {
+						"_0": "string[] Onion addresses associated with _urlName."
+					}
+				},
+				"getURLs()": {
+					"details": "The user can obtain the DNS names of his property.",
+					"returns": {
+						"_0": "string[] DNS name listing."
+					}
+				},
+				"setOnions(string,string[])": {
+					"details": "Associate a list of onion addresses to a DNS name.",
+					"params": {
+						"_onions": "string[] Onions to associate to _urlName.",
+						"_urlName": "name DNS."
+					}
+				},
+				"setURL(string)": {
+					"details": "The user can arrogate a DNS name that no one else owns.",
+					"params": {
+						"_urlName": "new DNS name."
+					}
+				},
+				"transferURLs(address,string)": {
+					"details": "Transfer ownership of a DNS name to another user.",
+					"params": {
+						"_to": "User that receives the DNS name.",
+						"_urlName": "name DNS."
+					}
+				},
+				"withdrawBalance()": {
+					"details": "The user can use this method to withdraw the remaining money."
+				}
+			},
+			"title": "Free decentralized DNS provider for Onion. ",
 			"version": 1
 		},
 		"userdoc": {
@@ -280,10 +334,10 @@
 	},
 	"sources": {
 		"contract.sol": {
-			"keccak256": "0xf8cc4649f81df693f199a087c9a658cf070ad458a09932559c603ff2cb9671de",
+			"keccak256": "0x9b185185278425aca3349917b5022f1f8aabf5dfbba85af8d04dfa05ee2a0773",
 			"urls": [
-				"bzz-raw://fa873e430b3a7fa0f67591da8f585b83851e2283f1f745543323aeda2c4e50e4",
-				"dweb:/ipfs/QmTUAoASZjJY5vvkJsxp2oPk3C1opCxVLrtpfo7xFGGKVq"
+				"bzz-raw://9f3a1d70e0d5bf9daa0788cffd878bbb5a9dd45925b8c13154787c99b1f7feef",
+				"dweb:/ipfs/QmSe3HE8nV6DEfKwJPZArxJUMky6HNKGHWrjJr7sQiWGPX"
 			]
 		}
 	},
