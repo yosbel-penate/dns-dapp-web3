@@ -1,5 +1,5 @@
 pragma solidity ^0.8.7;
-/** @title DNS provider. */
+/** @title Free decentralized DNS provider for Onion. */
 contract DnsProvider{
     //-->Variables
     address payable public owner;
@@ -10,18 +10,18 @@ contract DnsProvider{
     mapping(address=>uint) private userBalance;
     uint public totalSupply;
     bool private lockBalances;
-    //-->End Variables
+    //-->End
     //-->Events
     event Deposit(address sender, uint amount, uint balance);
     event WithdrawBalance( address user,uint amount, uint totalSupply);
-    //-->End Events
+    //-->End
     constructor()payable{
         owner = payable(msg.sender);
     }
     fallback() external payable {
        require(msg.data.length == 0); 
     }
-    /** @dev Usar este metodo para demositar dinero en el contrato.*/
+    /** @dev Use this method to deposit money in the contract.*/
     function deposit() payable external {
         require(!lockBalances);
         lockBalances = true;
@@ -31,7 +31,7 @@ contract DnsProvider{
         assert(address(this).balance >= totalSupply);
         emit Deposit(msg.sender, msg.value, userBalance[msg.sender]);
     }
-    /** @dev El usuario puede utilizar este metodo para retirar el dinero sobrante.*/
+    /** @dev The user can use this method to withdraw the remaining money.*/
     function withdrawBalance() public {
         require(!lockBalances);
         lockBalances = true;
@@ -43,14 +43,14 @@ contract DnsProvider{
         require(success);
         emit WithdrawBalance( msg.sender, amountToWithdraw, totalSupply);
     }
-    /** @dev Obtener el balance que tiene el contrato.
-      * @return balance del contrato.
+    /** @dev Obtain the balance that the contract has.
+      * @return contract balance.
       */
     function getBalance()external view returns(uint){
         return address(this).balance;
     }
-    /** @dev El usuario puede apropiarce se un nombre DNS que nadie posea.
-      * @param _urlName nuevo nombre DNS.
+    /** @dev The user can arrogate a DNS name that no one else owns.
+      * @param _urlName new DNS name.
       */
     function setURL(string memory _urlName)external{
         require(!nameExist[_urlName]);
@@ -58,14 +58,14 @@ contract DnsProvider{
         URLsByOwners[msg.sender].push(_urlName);
         nameExist[_urlName] = true;
     }
-    /** @dev El usuario puede obtener los nombres DNS de su propiedad.
-      * @return string[] Listado de nombres DNS.
+    /** @dev The user can obtain the DNS names of his property.
+      * @return string[] DNS name listing.
       */
     function getURLs() view external returns(string[] memory){
         return URLsByOwners[msg.sender];
     }
-    /** @dev Eliminar un nombre DNS.
-      * @param _urlName Nombre DNS.
+    /** @dev Delete a DNS name.
+      * @param _urlName Name DNS.
       */
     function deleteURLs(string memory _urlName)external{
         require(nameExist[_urlName]);
@@ -78,9 +78,9 @@ contract DnsProvider{
             }
         }
      }
-     /** @dev Transferir la propiedad de un nombre DNS a otro usuario.
-      * @param _to Usuario que recibir el nombre DNS.
-      * @param _urlName el nombre DNS.
+     /** @dev Transfer ownership of a DNS name to another user.
+      * @param _to User that receives the DNS name.
+      * @param _urlName name DNS.
       */
      function transferURLs(address _to, string memory _urlName)external{
         require(nameExist[_urlName]);
@@ -93,9 +93,9 @@ contract DnsProvider{
             }
         }
      }
-     /** @dev Asociar a un nombre DNS un listado de direcciones onions.
-      * @param _urlName Nombre de la direccion DNS.
-      * @param _onions string[] Onions a asociar a _urlName.
+     /** @dev Associate a list of onion addresses to a DNS name.
+      * @param _urlName name DNS.
+      * @param _onions string[] Onions to associate to _urlName.
       */
     function setOnions( string memory _urlName, string[] memory _onions)external{
         require(userBalance[msg.sender]>=handlingCost);
@@ -108,9 +108,9 @@ contract DnsProvider{
             }
         }
     }
-    /** @dev Optener las direcciones onion asociadas a un DNS name.
-      * @param _urlName Nombre de la direccion DNS.
-      * @return string[] Onions asociados a _urlName.
+    /** @dev Obtain onion addresses associated with a DNS name.
+      * @param _urlName name DNS.
+      * @return string[] Onion addresses associated with _urlName.
       */
     function getOnions(string memory _urlName)external view returns(string[] memory){
         string[] memory onions = nameOnions[_urlName];
