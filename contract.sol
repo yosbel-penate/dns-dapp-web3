@@ -1,11 +1,11 @@
 pragma solidity ^0.8.7;
 
-contract Payabel{
+contract DnsProvider{
     uint constant public handlingCost =  1800000000000000;
     address payable public owner;
-    mapping(address=>string[]) public URLsByOwners;
-    mapping(string=>string[]) public nameOnions;
-    mapping(string => bool) public nameExist;
+    mapping(address=>string[]) private URLsByOwners;
+    mapping(string=>string[]) private nameOnions;
+    mapping(string => bool) private nameExist;
     constructor()payable{
         owner = payable(msg.sender);
     }

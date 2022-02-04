@@ -264,7 +264,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contract.sol": "Payabel"
+			"contract.sol": "DnsProvider"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -279,10 +279,10 @@
 	},
 	"sources": {
 		"contract.sol": {
-			"keccak256": "0xcd507f8c0bf2af1022b4437e7b2873cf1cd256a6341176ae67e5d7cbf63780fe",
+			"keccak256": "0xb7a311ec737723ad9b3452f364811c2abcc40b16b7c443f46b84b4b26353d612",
 			"urls": [
-				"bzz-raw://552fe74076fd51f2696f8591eabfda3ba6809315dafbdbabca4316ad04b67d63",
-				"dweb:/ipfs/QmbqU8TqhV64axg1H1AD5PQWihTyyCW8UbGu33G9mrJPad"
+				"bzz-raw://55a7b8bd64fb5ecd0bfdc8b5de65cabb54d1fd5da757758f41542835f315d039",
+				"dweb:/ipfs/QmNQHsNmWWLan2mf1eNtqLJ9UDY7sgHGbkYwYJc3tuNSVr"
 			]
 		}
 	},
