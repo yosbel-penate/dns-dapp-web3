@@ -218,25 +218,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "userBalance",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "withdrawBalance",
 				"outputs": [],
@@ -279,10 +260,10 @@
 	},
 	"sources": {
 		"contract.sol": {
-			"keccak256": "0xb7a311ec737723ad9b3452f364811c2abcc40b16b7c443f46b84b4b26353d612",
+			"keccak256": "0x5f0396205a8d5d58f39c7c86a2ba57f7db9c971ec2d4ab84f9c8ed18add3cdfb",
 			"urls": [
-				"bzz-raw://55a7b8bd64fb5ecd0bfdc8b5de65cabb54d1fd5da757758f41542835f315d039",
-				"dweb:/ipfs/QmNQHsNmWWLan2mf1eNtqLJ9UDY7sgHGbkYwYJc3tuNSVr"
+				"bzz-raw://06837991d6483beb2de91e0d793768400dee0f7477f19bda7bc9bcfb48a5449f",
+				"dweb:/ipfs/QmZbLuFQVZodv66NkMeENzDREca9gUnGvFEiUxSma7bbpa"
 			]
 		}
 	},

@@ -9,7 +9,7 @@ contract DnsProvider{
     constructor()payable{
         owner = payable(msg.sender);
     }
-    mapping(address=>uint) public userBalance;
+    mapping(address=>uint) private userBalance;
     uint public totalSupply;
     event Deposit(address sender, uint amount, uint balance);
     function deposit() payable external {
