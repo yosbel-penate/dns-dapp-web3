@@ -3,8 +3,8 @@ pragma solidity ^0.8.7;
 contract DnsProvider{
     //-->Variables
     address payable public owner;
-    uint constant private onionsLength = 20;
     uint constant private URLsLength = 20;
+    uint constant private onionsLength = 20;
     uint constant public handlingCost =  1800000000000000;
     mapping(address=>string[]) private URLsByOwners;
     mapping(string=>string[]) private nameOnions;
@@ -118,8 +118,7 @@ contract DnsProvider{
       * @return string[] Onion addresses associated with _urlName.
       */
     function getOnions(string memory _urlName)external view returns(string[] memory){
-        string[] memory onions = nameOnions[_urlName];
-        return onions;
+        return nameOnions[_urlName];
     }
     function runThePayment() internal returns(bool){
          require(!lockBalances);

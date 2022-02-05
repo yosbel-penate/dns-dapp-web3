@@ -334,10 +334,10 @@
 	},
 	"sources": {
 		"contract.sol": {
-			"keccak256": "0xda5cd484ce6d76acd310c09decb810a4ff8318bcde9f51a0afe1cd756e91a342",
+			"keccak256": "0xcc81e6c326b43e74c1758ad737f144cd44d3fa930dada82d87104ea696b71ebb",
 			"urls": [
-				"bzz-raw://fe30e4612b23804e3c48f9854cde7d16acb1863cf539a3a1c87b6fea28604f41",
-				"dweb:/ipfs/QmT841pXnX6HieX4n9zSWv66vZyMztCqjYufkZDjtVCT9E"
+				"bzz-raw://e0627d1739691c6566ebd869e9f8c0d1896eafa3e8785cca6a77062167c42de5",
+				"dweb:/ipfs/QmVrQxgKHsHC7EJyvw6Z66y3aroFz5zie9TofX1Pd3FfAy"
 			]
 		}
 	},
