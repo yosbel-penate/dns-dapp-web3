@@ -3,6 +3,8 @@ pragma solidity ^0.8.7;
 contract DnsProvider{
     //-->Variables
     address payable public owner;
+    uint constant private onionsLength = 20;
+    uint constant private URLsLength = 20;
     uint constant public handlingCost =  1800000000000000;
     mapping(address=>string[]) private URLsByOwners;
     mapping(string=>string[]) private nameOnions;
@@ -38,9 +40,8 @@ contract DnsProvider{
             uint amountToWithdraw = userBalance[msg.sender];
             userBalance[msg.sender] = 0;
             totalSupply -= amountToWithdraw;
-            bool success = payable(msg.sender).send(amountToWithdraw);
+            payable(msg.sender).transfer(amountToWithdraw);
         lockBalances = false;
-        require(success);
         emit WithdrawBalance( msg.sender, amountToWithdraw, totalSupply);
     }
     /** @dev Obtain the balance that the contract has.
@@ -55,6 +56,7 @@ contract DnsProvider{
     function setURL(string memory _urlName)external{
         require(!nameExist[_urlName]);
         require(runThePayment());
+        require(URLsByOwners[msg.sender].length<URLsLength);
         URLsByOwners[msg.sender].push(_urlName);
         nameExist[_urlName] = true;
     }
@@ -72,7 +74,8 @@ contract DnsProvider{
         string[] memory urlNames = URLsByOwners[msg.sender];
         for(uint i=0; i<urlNames.length; i++){
             if(memcmp(bytes(urlNames[i]), bytes(_urlName))){
-                delete URLsByOwners[msg.sender][i];
+                URLsByOwners[msg.sender][i] = URLsByOwners[msg.sender][urlNames.length - 1];
+                URLsByOwners[msg.sender].pop();
                 delete nameOnions[_urlName];
                 delete nameExist[_urlName];
             }
@@ -88,7 +91,8 @@ contract DnsProvider{
         for(uint i=0; i<urlNames.length; i++){
             if(memcmp(bytes(urlNames[i]), bytes(_urlName))){
                 delete nameOnions[_urlName];
-                delete URLsByOwners[msg.sender][i];
+                URLsByOwners[msg.sender][i] = URLsByOwners[msg.sender][urlNames.length - 1];
+                URLsByOwners[msg.sender].pop();
                 URLsByOwners[_to].push(_urlName);
             }
         }
@@ -100,6 +104,7 @@ contract DnsProvider{
     function setOnions( string memory _urlName, string[] memory _onions)external{
         require(userBalance[msg.sender]>=handlingCost);
         require(nameExist[_urlName]);
+        require(_onions.length<onionsLength);
         string[] memory urlNames = URLsByOwners[msg.sender];
         for(uint i=0; i<urlNames.length; i++){
             if(memcmp(bytes(urlNames[i]), bytes(_urlName))){
@@ -120,19 +125,18 @@ contract DnsProvider{
          require(!lockBalances);
          lockBalances = true;
             require(userBalance[msg.sender]>=handlingCost);
-            userBalance[msg.sender]-=handlingCost;
             totalSupply -= handlingCost;
-            bool success = owner.send(handlingCost);
+            userBalance[msg.sender]-=handlingCost;
+            owner.transfer(handlingCost);
          lockBalances = false;
-         return success;
+         return true;
     }
     function withdrawSurplus()public onlyOwner{
         require(!lockBalances);
         lockBalances = true;
             uint amountToWithdraw = address(this).balance - totalSupply;
-            bool success = owner.send(amountToWithdraw);
+            owner.transfer(amountToWithdraw);
         lockBalances = false;
-        require(success);
         emit WithdrawBalance( msg.sender, amountToWithdraw, address(this).balance);
     }
     modifier onlyOwner(){
