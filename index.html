@@ -31,7 +31,7 @@
                 onclick="copy()"
                 class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
                 >
-                <span>Contract: 0x119B654E0b39F059b5D8D0603d3E04aC5f810669</span>
+                <span id="spanCopyContractAddress">Contract: ---</span>
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
             </button>
             <div class="flex flex-col space-y-2">
@@ -123,7 +123,7 @@
                 onclick="deposit_onclick()"
                 class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
                 >
-                <span>Deposit 3000 Wei</span>
+                <span id="depositButton">Deposit: ---</span>
             </button>
             <div class="w-full">
                 <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -144,8 +144,10 @@
                         </button>
                     </div>
                     <div class="mb-4 flex">
-                        <input  id="username" type="text" placeholder="Username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button">
+                        <input  id="URLs" type="text" placeholder="URL List" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button"
+                            onclick="getURLs()" 
+                        >
                             Call
                         </button>
                     </div>
@@ -156,7 +158,8 @@
         </div>
         <script>
             window.userAddress = null;
-            window.CONTRACT_ADDRESS='0x119B654E0b39F059b5D8D0603d3E04aC5f810669';
+            window.CONTRACT_ADDRESS='0xf86415cEEeb46C95A4BB741f536513a7b5BC2BE3';
+            window.handlerCost=1800000000000000;
             window.onload =  async ()=>{
                 if(window.ethereum){
                     window.web3=new Web3(ethereum);
@@ -220,6 +223,8 @@
                 document.getElementById('ownerValueText').innerHTML = ownerValue;
                 document.getElementById('getBalanceText').innerHTML = getBalanceValue;
                 document.getElementById('totalSupplyText').innerHTML = totalSupplyValue;
+                document.getElementById('depositButton').innerHTML="Deposit: " + window.handlerCost;
+                document.getElementById('spanCopyContractAddress').innerHTML="Contract: " + window.CONTRACT_ADDRESS;
             }
             async function setURL_onclick(){
                 const contract = new window.web3.eth.Contract(window.ABI, window.CONTRACT_ADDRESS);
@@ -239,7 +244,8 @@
             async function deposit_onclick(){
                 const contract = new window.web3.eth.Contract(window.ABI, window.CONTRACT_ADDRESS);
                 try{
-                    await contract.methods.deposit().send({from: window.userAddress, value: 3000});
+                    await contract.methods.deposit().send({from: window.userAddress, value: window.handlerCost});
+                    await getContractSymbol();
                 }catch(error){
                     console.log(error);
                 }
@@ -262,6 +268,12 @@
             function hasWhiteSpace(s) {
                 return s.indexOf(' ') >= 0;
             }
-            window.ABI=[{"inputs":[],"stateMutability":"payable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"balance","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"sender","type":"address"}],"name":"LogDepositReceived","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"balance","type":"uint256"}],"name":"userWithDraw","type":"event"},{"stateMutability":"payable","type":"fallback"},{"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"URLsByOwner","outputs":[{"internalType":"string","name":"name","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"getBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"}],"name":"getOnions","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"nameExist","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"nameOnions","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"},{"internalType":"string[]","name":"_onions","type":"string[]"}],"name":"setOnions","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"}],"name":"setURL","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"userBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"userWithdraw","outputs":[],"stateMutability":"payable","type":"function"}];
+            async function getURLs(){
+                const contract = new window.web3.eth.Contract(window.ABI, window.CONTRACT_ADDRESS);
+                const URLs = await contract.methods.getURLs().call({from: window.userAddress});
+                document.getElementById('URLs').value = URLs;
+
+            }
+            window.ABI=[{"inputs":[],"stateMutability":"payable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"balance","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"totalSupply","type":"uint256"}],"name":"WithdrawBalance","type":"event"},{"stateMutability":"payable","type":"fallback"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"}],"name":"deleteURLs","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"getBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"}],"name":"getOnions","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getURLs","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"handlingCost","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"nameExist","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"},{"internalType":"string[]","name":"_onions","type":"string[]"}],"name":"setOnions","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"}],"name":"setURL","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"string","name":"_urlName","type":"string"}],"name":"transferURLs","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawBalance","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawSurplus","outputs":[],"stateMutability":"nonpayable","type":"function"}];
         </script>
 </body>
