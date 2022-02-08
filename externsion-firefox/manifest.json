@@ -1,0 +1,29 @@
+{
+
+    "manifest_version": 2,
+    "name": "Beastify",
+    "version": "1.0",
+  
+    "description": "Agrega un icono de acción navegación a la barra de herramientas. Haga clic en el botón para elegir una bestia. El contenido del cuerpo de la pestaña activa se sustituye por una imagen de la bestia elegida. Consulte https://developer.mozilla.org/es/Add-ons/WebExtensions/Examples#beastify",
+    "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/beastify",
+    "icons": {
+      "48": "icons/beasts-48.png"
+    },
+  
+    "permissions": [
+      "activeTab"
+    ],
+  
+    "browser_action": {
+      "default_icon": "icons/beasts-32.png",
+      "default_title": "Bestificar",
+      "default_popup": "popup/choose_beast.html"
+    },
+  
+    "web_accessible_resources": [
+      "beasts/frog.jpg",
+      "beasts/turtle.jpg",
+      "beasts/snake.jpg"
+    ]
+  
+  }
