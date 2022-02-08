@@ -87,79 +87,75 @@
                         </div>
                     </div>
                 </div>
-            <button
-                id="getContractInfo"
-                onclick="getContractSymbol()"
-                class="rounded place-content-center bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
+                <button
+                    id="getContractInfo"
+                    onclick="getContractSymbol()"
+                    class="rounded place-content-center bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
+                    >
+                    <span>Refresh Contract Symbol</span>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+                <button
+                    onclick="loginWithEth()"
+                    class=" rounded bg-white border border-gray-400 hover:bg-gray-100 py-2 px-4 text-gray-600 hover:text-gray-700"
                 >
-                <span>Refresh Contract Symbol</span>
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-            </button>
-            <button
-                onclick="loginWithEth()"
-                class="
-                rounded
-                bg-white
-                border border-gray-400
-                hover:bg-gray-100
-                py-2
-                px-4
-                text-gray-600
-                hover:text-gray-700
-                "
-            >
-                Login & Save ETH Address
-            </button>
-            <p id="userAddress" class="text-gray-600"></p>
-            <button
-                id="logoutButton"
-                onclick="logout()"
-                class="hidden text-blue-500 underline"
-            >
-                Logout
-            </button>
-            </div>
-            <button
-                onclick="deposit_onclick()"
-                class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
+                    Login & Save ETH Address
+                </button>
+                <p id="userAddress" class="text-gray-600"></p>
+                <button
+                    id="logoutButton"
+                    onclick="logout()"
+                    class="hidden text-blue-500 underline"
                 >
-                <span id="depositButton">Deposit: ---</span>
-            </button>
-            <div class="w-full">
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <div class="mb-4 flex">
-                        <input  id="setURL" type="text" placeholder="Set URL" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <button onclick="setURL_onclick()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button">
-                            Call
-                        </button>
-                    </div>
-                    <div class="mb-4 flex">
-                        <input  id="nameExist" type="text" placeholder="Exist URL?" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <button
-                                onclick="nameExist_onclick()"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
-                                type="button"
+                    Logout
+                </button>
+                <button
+                    onclick="deposit_onclick()"
+                    class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
+                    >
+                    <span id="depositButton">Deposit: ---</span>
+                </button>
+                <button
+                    onclick="withdrawBalance_onclick()"
+                    class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
+                >
+                    <span>Withdraw Balance</span>
+                </button>
+                <div class="w-full">
+                    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                        <div class="mb-4 flex">
+                            <input  id="setURL" type="text" placeholder="Set URL" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <button onclick="setURL_onclick()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button">
+                                Call
+                            </button>
+                        </div>
+                        <div class="mb-4 flex">
+                            <input  id="nameExist" type="text" placeholder="Exist URL?" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <button
+                                    onclick="nameExist_onclick()"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
+                                    type="button"
+                                >
+                                Call
+                            </button>
+                        </div>
+                        <div class="mb-4 flex">
+                            <input  id="URLs" type="text" placeholder="URL List" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button"
+                                onclick="getURLs_onclick()"
                             >
-                            Call
-                        </button>
-                    </div>
-                    <div class="mb-4 flex">
-                        <input  id="URLs" type="text" placeholder="URL List" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button"
-                            onclick="getURLs()" 
-                        >
-                            Call
-                        </button>
-                    </div>
-                </form>
+                                Call
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="flex flex-col space-y-2"></div>
         </div>
         </div>
         <script>
-            window.userAddress = null;
             window.CONTRACT_ADDRESS='0xf86415cEEeb46C95A4BB741f536513a7b5BC2BE3';
             window.handlerCost=1800000000000000;
+            window.userAddress = null;
             window.onload =  async ()=>{
                 if(window.ethereum){
                     window.web3=new Web3(ethereum);
@@ -232,6 +228,7 @@
                 if(!isEmpty(setURLText) && !hasWhiteSpace(setURLText)){
                     try{
                         await contract.methods.setURL(setURLText).send({from: window.userAddress});
+                        await getContractSymbol();
                     }catch(error){
                         console.log(error);
                     }
@@ -268,11 +265,15 @@
             function hasWhiteSpace(s) {
                 return s.indexOf(' ') >= 0;
             }
-            async function getURLs(){
+            async function getURLs_onclick(){
                 const contract = new window.web3.eth.Contract(window.ABI, window.CONTRACT_ADDRESS);
                 const URLs = await contract.methods.getURLs().call({from: window.userAddress});
                 document.getElementById('URLs').value = URLs;
-
+            }
+            async function withdrawBalance_onclick(){
+                const contract = new window.web3.eth.Contract(window.ABI, window.CONTRACT_ADDRESS);
+                await contract.methods.withdrawBalance().send({from: window.userAddress, });
+                await getContractSymbol();
             }
             window.ABI=[{"inputs":[],"stateMutability":"payable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"balance","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"totalSupply","type":"uint256"}],"name":"WithdrawBalance","type":"event"},{"stateMutability":"payable","type":"fallback"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"}],"name":"deleteURLs","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"getBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"}],"name":"getOnions","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getURLs","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"handlingCost","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"nameExist","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"},{"internalType":"string[]","name":"_onions","type":"string[]"}],"name":"setOnions","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"}],"name":"setURL","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"string","name":"_urlName","type":"string"}],"name":"transferURLs","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawBalance","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawSurplus","outputs":[],"stateMutability":"nonpayable","type":"function"}];
         </script>
