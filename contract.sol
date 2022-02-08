@@ -90,6 +90,7 @@ contract DnsProvider{
         string[] memory urlNames = URLsByOwners[msg.sender];
         for(uint i=0; i<urlNames.length; i++){
             if(memcmp(bytes(urlNames[i]), bytes(_urlName))){
+                require(runThePayment());
                 delete nameOnions[_urlName];
                 URLsByOwners[msg.sender][i] = URLsByOwners[msg.sender][urlNames.length - 1];
                 URLsByOwners[msg.sender].pop();
