@@ -147,6 +147,23 @@
                                 Call
                             </button>
                         </div>
+                        <div class="mb-4 flex">
+                            <input  id="Onions" type="text" placeholder="URL" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button"
+                                onclick="getOnions_onclick()"
+                            >
+                                Call
+                            </button>
+                        </div>
+                        <div class="mb-4 flex">
+                            <input  id="setOnions_url" type="text" placeholder="URL" class=" mr-5 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <input  id="setOnions_onions" type="text" placeholder="Onions String[]" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button"
+                                onclick="setOnions_onclick()"
+                            >
+                                Call
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -274,6 +291,22 @@
                 const contract = new window.web3.eth.Contract(window.ABI, window.CONTRACT_ADDRESS);
                 await contract.methods.withdrawBalance().send({from: window.userAddress, });
                 await getContractSymbol();
+            }
+            async function getOnions_onclick(){
+                const contract = new window.web3.eth.Contract(window.ABI, window.CONTRACT_ADDRESS);
+                var url = document.getElementById('Onions').value;
+                const onions = await contract.methods.getOnions(url).call({from: window.userAddress});
+                alert(onions);
+                document.getElementById('Onions').value = "";
+            }
+            async function setOnions_onclick(){
+                const contract = new window.web3.eth.Contract(window.ABI, window.CONTRACT_ADDRESS);
+                var url = document.getElementById('setOnions_url').value;
+                var onions = document.getElementById('setOnions_onions').value.split(",").map(String);
+                await contract.methods.setOnions(url, onions).send({from: window.userAddress,});
+                await getContractSymbol();
+                document.getElementById('setOnions_url').value = "";
+                document.getElementById('setOnions_onions').value = "";
             }
             window.ABI=[{"inputs":[],"stateMutability":"payable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"balance","type":"uint256"}],"name":"Deposit","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"totalSupply","type":"uint256"}],"name":"WithdrawBalance","type":"event"},{"stateMutability":"payable","type":"fallback"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"}],"name":"deleteURLs","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"deposit","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"getBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"}],"name":"getOnions","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getURLs","outputs":[{"internalType":"string[]","name":"","type":"string[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"handlingCost","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"","type":"string"}],"name":"nameExist","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"},{"internalType":"string[]","name":"_onions","type":"string[]"}],"name":"setOnions","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_urlName","type":"string"}],"name":"setURL","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"string","name":"_urlName","type":"string"}],"name":"transferURLs","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawBalance","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawSurplus","outputs":[],"stateMutability":"nonpayable","type":"function"}];
         </script>
