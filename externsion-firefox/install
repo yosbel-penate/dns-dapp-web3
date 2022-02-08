@@ -1,3 +1,9 @@
 Abre "about:debugging" en Firefox, de clic en "Cargar complemento temporalmente", 
 y seleccione el archivo manifest.json. Entonces, debería de ver el ícono de la 
-extensión aparecer en la barra de herramientas de Firefox:
+extensión aparecer en la barra de herramientas de Firefox
+
+or 
+
+comand line
+
+> web-ext run
