@@ -11,163 +11,152 @@
         referrerpolicy="no-referrer"
         ></script>
     </head>
-
-    <body class="h-full">
-        <div
-        class="
-            flex
-            w-full
-            h-full
-            justify-center
-            content-center
-            items-center
-            space-x-4
-        "
-        >
-        <div class="flex flex-col space-y-6 m-100">
-            <br/>
-            <button
-                id="copyContractAddress"
-                onclick="copy()"
-                class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
-                >
-                <span id="spanCopyContractAddress">Contract: ---</span>
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-            </button>
-            <div class="flex flex-col space-y-2">
-                <div class="container flex justify-center mx-auto">
-                    <div class="flex flex-col">
-                        <div class="w-full">
-                            <div class="border-b border-gray-200 shadow">
-                                <table>
-                                    <thead class="bg-gray-50">
-                                        <tr>
-                                            <th class="px-6 py-2 text-xs text-gray-500">
-                                                Information
-                                            </th>
-                                            <th class="px-6 py-2 text-xs text-gray-500">
-                                                Value
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white">
-                                        <tr class="whitespace-nowrap">
-                                            <td class="px-6 py-4 text-sm text-gray-500">
-                                                Owner
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div id="ownerValueText" class="text-sm text-gray-900">
-                                                    Jon doe
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="whitespace-nowrap">
-                                            <td class="px-6 py-4 text-sm text-gray-500">
-                                                Balance
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div id="getBalanceText" class="text-sm text-gray-900">
-                                                    Jon doe
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr class="whitespace-nowrap">
-                                            <td class="px-6 py-4 text-sm text-gray-500">
-                                                Total Supply
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <div id="totalSupplyText" class="text-sm text-gray-900">
-                                                    Jon doe
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+    <body class="h-screen">
+        <div class="flex w-full  justify-center content-center items-center space-x-4" >
+            <div class="flex flex-col space-y-6 m-100">
+            </br>
+                <button
+                        id="copyContractAddress"
+                        onclick="copy()"
+                        class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
+                        >
+                            <span id="spanCopyContractAddress">Contract: ---</span>
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                    </button>
+                <div class="flex flex-col space-y-2">
+                    <div class="container flex justify-center mx-auto">
+                        <div class="flex flex-col">
+                            <div class="w-full">
+                                <div class="border-b border-gray-200 shadow">
+                                    <table>
+                                        <thead class="bg-gray-50">
+                                            <tr>
+                                                <th class="px-6 py-2 text-xs text-gray-500">
+                                                    Information
+                                                </th>
+                                                <th class="px-6 py-2 text-xs text-gray-500">
+                                                    Value
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white">
+                                            <tr class="whitespace-nowrap">
+                                                <td class="px-6 py-4 text-sm text-gray-500">
+                                                    Owner
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    <div id="ownerValueText" class="text-sm text-gray-900">
+                                                        Jon doe
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="whitespace-nowrap">
+                                                <td class="px-6 py-4 text-sm text-gray-500">
+                                                    Balance
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    <div id="getBalanceText" class="text-sm text-gray-900">
+                                                        Jon doe
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="whitespace-nowrap">
+                                                <td class="px-6 py-4 text-sm text-gray-500">
+                                                    Total Supply
+                                                </td>
+                                                <td class="px-6 py-4">
+                                                    <div id="totalSupplyText" class="text-sm text-gray-900">
+                                                        Jon doe
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <button
-                    id="getContractInfo"
-                    onclick="getContractSymbol()"
-                    class="rounded place-content-center bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
+                    
+                    <button id="getContractInfo"
+                            onclick="getContractSymbol()"
+                            class="rounded place-content-center bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
+                        >
+                        <span>Refresh Contract Symbol</span>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </button>
+                    <button
+                        onclick="loginWithEth()"
+                        class=" rounded bg-white border border-gray-400 hover:bg-gray-100 py-2 px-4 text-gray-600 hover:text-gray-700"
                     >
-                    <span>Refresh Contract Symbol</span>
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                </button>
-                <button
-                    onclick="loginWithEth()"
-                    class=" rounded bg-white border border-gray-400 hover:bg-gray-100 py-2 px-4 text-gray-600 hover:text-gray-700"
-                >
-                    Login & Save ETH Address
-                </button>
-                <p id="userAddress" class="text-gray-600"></p>
-                <button
-                    id="logoutButton"
-                    onclick="logout()"
-                    class="hidden text-blue-500 underline"
-                >
-                    Logout
-                </button>
-                <button
-                    onclick="deposit_onclick()"
-                    class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
+                        Login & Save ETH Address
+                    </button>
+                    <p id="userAddress" class="text-gray-600"></p>
+                    <button
+                        id="logoutButton"
+                        onclick="logout()"
+                        class="hidden text-blue-500 underline"
                     >
-                    <span id="depositButton">Deposit: ---</span>
-                </button>
-                <button
-                    onclick="withdrawBalance_onclick()"
-                    class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
-                >
-                    <span>Withdraw Balance</span>
-                </button>
-                <div class="w-full">
-                    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                        <div class="mb-4 flex">
-                            <input  id="setURL" type="text" placeholder="Set URL" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            <button onclick="setURL_onclick()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button">
-                                Call
-                            </button>
-                        </div>
-                        <div class="mb-4 flex">
-                            <input  id="nameExist" type="text" placeholder="Exist URL?" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            <button
-                                    onclick="nameExist_onclick()"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
-                                    type="button"
+                        Logout
+                    </button>
+                    <button
+                        onclick="deposit_onclick()"
+                        class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
+                        >
+                        <span id="depositButton">Deposit: ---</span>
+                    </button>
+                    <button
+                        onclick="withdrawBalance_onclick()"
+                        class="rounded bg-blue-500 hover:bg-blue-700 py-2 px-4 text-white inline-flex items-center"
+                    >
+                        <span>Withdraw Balance</span>
+                    </button>
+                    <div class="w-full">
+                        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                            <div class="mb-4 flex">
+                                <input  id="setURL" type="text" placeholder="Set URL" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <button onclick="setURL_onclick()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button">
+                                    Call
+                                </button>
+                            </div>
+                            <div class="mb-4 flex">
+                                <input  id="nameExist" type="text" placeholder="Exist URL?" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <button
+                                        onclick="nameExist_onclick()"
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline"
+                                        type="button"
+                                    >
+                                    Call
+                                </button>
+                            </div>
+                            <div class="mb-4 flex">
+                                <input  id="URLs" type="text" placeholder="URL List" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button"
+                                    onclick="getURLs_onclick()"
                                 >
-                                Call
-                            </button>
-                        </div>
-                        <div class="mb-4 flex">
-                            <input  id="URLs" type="text" placeholder="URL List" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button"
-                                onclick="getURLs_onclick()"
-                            >
-                                Call
-                            </button>
-                        </div>
-                        <div class="mb-4 flex">
-                            <input  id="Onions" type="text" placeholder="Get Onions by URL" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button"
-                                onclick="getOnions_onclick()"
-                            >
-                                Call
-                            </button>
-                        </div>
-                        <div class="mb-4 flex">
-                            <input  id="setOnions_url" type="text" placeholder="URL" class=" mr-5 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            <input  id="setOnions_onions" type="text" placeholder="Onions String[]" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button"
-                                onclick="setOnions_onclick()"
-                            >
-                                Call
-                            </button>
-                        </div>
-                    </form>
+                                    Call
+                                </button>
+                            </div>
+                            <div class="mb-4 flex">
+                                <input  id="Onions" type="text" placeholder="Get Onions by URL" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button"
+                                    onclick="getOnions_onclick()"
+                                >
+                                    Call
+                                </button>
+                            </div>
+                            <div class="mb-4 flex">
+                                <input  id="setOnions_url" type="text" placeholder="URL" class=" mr-5 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <input  id="setOnions_onions" type="text" placeholder="Onions String[]" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-2 rounded focus:outline-none focus:shadow-outline" type="button"
+                                    onclick="setOnions_onclick()"
+                                >
+                                    Call
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
         <script>
             window.CONTRACT_ADDRESS='0xf86415cEEeb46C95A4BB741f536513a7b5BC2BE3';
