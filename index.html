@@ -303,7 +303,6 @@
                 const contract = new window.web3.eth.Contract(window.ABI, window.CONTRACT_ADDRESS);
                 var url = document.getElementById('Onions').value;
                 const onions = await contract.methods.getOnions(url).call({from: window.userAddress});
-                alert(onions);
                 document.getElementById('Onions').value = "";
                 let list = document.getElementById("onionList");
                 createList(list, onions)
@@ -327,8 +326,13 @@
                 document.getElementById('transfer_url').value = "";
             }
             function createList(list, data) {
+                list.innerHTML ='';
                 data.forEach((item)=>{
                                 let li = document.createElement("li");
+                                var classes =["p-3", "hover:bg-blue-600", "hover:text-blue-200"];
+                                classes.forEach((itemClass)=>{
+                                    li.className+=itemClass;
+                                })
                                 li.innerText = item;
                                 list.appendChild(li);
                             })
