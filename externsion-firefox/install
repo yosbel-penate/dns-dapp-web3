@@ -10,3 +10,5 @@ or comand line for firefox:
 or for Tor:
 
 > web-ext run --firefox="C:\Users\m1911770\Desktop\Tor Browser\Browser\firefox.exe"
+
+web-ext run --firefox="C:\Program Files\Mozilla Firefox\firefox.exe"
