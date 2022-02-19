@@ -1,0 +1,76 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "payable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_urlName",
+						"type": "string"
+					}
+				],
+				"name": "setURL",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"offert.sol": "OffertDNS"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"offert.sol": {
+			"keccak256": "0xd037295a8a9d7ca1723c6c4b5b16207110e018bb4adf196f4e7d24b41308466e",
+			"urls": [
+				"bzz-raw://cc5a76ba9de515ecaaf84e50acb160b1c1fc1a1dc0669495da5dc8974ab602f0",
+				"dweb:/ipfs/Qmbb4kx9n4AeeLWFNEiKWBQNdurJ349yFHAwTY4S7nf6zo"
+			]
+		}
+	},
+	"version": 1
+}

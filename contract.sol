@@ -5,7 +5,7 @@ contract DnsProvider{
     address payable public owner;
     uint constant private URLsLength = 20;
     uint constant private onionsLength = 20;
-    uint constant public handlingCost =  1800000000000000;
+    uint constant public handlingCost =  18e14;
     mapping(address=>string[]) private URLsByOwners;
     mapping(string=>string[]) private nameOnions;
     mapping(string => bool) public nameExist;
@@ -16,6 +16,7 @@ contract DnsProvider{
     //-->Events
     event Deposit(address sender, uint amount, uint balance);
     event WithdrawBalance( address user,uint amount, uint totalSupply);
+    event RunThePayment(address from);
     //-->End
     constructor()payable{
         owner = payable(msg.sender);
@@ -86,6 +87,7 @@ contract DnsProvider{
       * @param _urlName name DNS.
       */
      function transferURLs(address _to, string memory _urlName)external{
+        require(_to != address(0), "DNS: transfer from the zero address");
         require(nameExist[_urlName]);
         string[] memory urlNames = URLsByOwners[msg.sender];
         for(uint i=0; i<urlNames.length; i++){
@@ -125,10 +127,11 @@ contract DnsProvider{
          require(!lockBalances);
          lockBalances = true;
             require(userBalance[msg.sender]>=handlingCost);
-            totalSupply -= handlingCost;
             userBalance[msg.sender]-=handlingCost;
+            totalSupply -= handlingCost;
             owner.transfer(handlingCost);
          lockBalances = false;
+         emit RunThePayment(msg.sender);
          return true;
     }
     function withdrawSurplus()public onlyOwner{
